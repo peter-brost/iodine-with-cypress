@@ -18,3 +18,6 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Import Cypress Real Events plugin
+import "cypress-real-events/support"
