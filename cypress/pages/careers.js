@@ -62,55 +62,55 @@ class CareersPage {
     }
 
     // Helper functions
-    selectSDETRole() {
+
+    waitForAndGetNewIframe() {
         cy.wait(2000)
         cy.get(this.gnewtonIframe).as('gnewtonIframe').should('be.visible')
         cy.get('@gnewtonIframe').iframe().as('iframeBody')
+    }
+
+    selectSDETRole() {
+        this.waitForAndGetNewIframe()
         cy.get('@iframeBody').find(this.sdetRoleLink).click()
     }
 
     selectApplyButton() {
-        cy.wait(2000)
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
-        cy.get('@updatedIframeBody').find(this.applyButton).click()
+        this.waitForAndGetNewIframe()
+        cy.get('@iframeBody').find(this.applyButton).click()
     }
 
     selectContinueButton() {
-        cy.wait(2000)
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
-        cy.get('@updatedIframeBody').find(this.continueButton).click()
+        this.waitForAndGetNewIframe()
+        cy.get('@iframeBody').find(this.continueButton).click()
     }
 
     selectDemographics() {
-        cy.wait(2000)
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
-        cy.get('@updatedIframeBody').find(this.genderSelection).click()
-        cy.get('@updatedIframeBody').find(this.ethnicitySelection).click()
-        cy.get('@updatedIframeBody').find(this.continueButton).click()
+        this.waitForAndGetNewIframe()
+        cy.get('@iframeBody').find(this.genderSelection).click()
+        cy.get('@iframeBody').find(this.ethnicitySelection).click()
+        cy.get('@iframeBody').find(this.continueButton).click()
     }
 
     selectVeteranStatus() {
-        cy.wait(2000)
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
-        cy.get('@updatedIframeBody').find(this.veteranSelection).click()
-        cy.get('@updatedIframeBody').find(this.continueButton).click()
+        this.waitForAndGetNewIframe()
+        cy.get('@iframeBody').find(this.veteranSelection).click()
+        cy.get('@iframeBody').find(this.continueButton).click()
     }
 
     selectDisabilityStatus(firstName, lastName, formattedDate) {
-        cy.wait(2000)
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
-        cy.get('@updatedIframeBody').find(this.disabilitySelection).click()
-        cy.get('@updatedIframeBody').find(this.disabilityNameInput).type(`${firstName} ${lastName}`)
-        cy.get('@updatedIframeBody').find(this.disabilityDateInput).type(formattedDate)
-        cy.get('@updatedIframeBody').find(this.continueButton).click()
+        this.waitForAndGetNewIframe()
+        cy.get('@iframeBody').find(this.disabilitySelection).click()
+        cy.get('@iframeBody').find(this.disabilityNameInput).type(`${firstName} ${lastName}`)
+        cy.get('@iframeBody').find(this.disabilityDateInput).type(formattedDate)
+        cy.get('@iframeBody').find(this.continueButton).click()
     }
 
     inputApplicationDetails(firstName, lastName) {
-        cy.wait(2000)
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
-        cy.get('@updatedIframeBody').find(this.applicationFirstNameInput).type(firstName)
-        cy.get('@updatedIframeBody').find(this.applicationLastNameInput).type(lastName)
-        cy.get('@updatedIframeBody').find(this.applicationSubmitButton).click()
+        this.waitForAndGetNewIframe()
+        cy.get('@iframeBody').find(this.applicationFirstNameInput).type(firstName)
+        cy.get('@iframeBody').find(this.applicationLastNameInput).type(lastName)
+        // Ideally this would be expanded to take in arguments for every single field on the application form
+        cy.get('@iframeBody').find(this.applicationSubmitButton).click()
     }
 
     applyToSDETRole(firstName, lastName, formattedDate) {
@@ -124,8 +124,9 @@ class CareersPage {
     }
 
     getIframedEmailElement() {
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
-        return cy.get('@updatedIframeBody').find(this.applicationEmailInput)
+        // A small helper method to make verifying the error message on the email input field easier
+        cy.get('@gnewtonIframe').iframe().as('iframeBody')
+        return cy.get('@iframeBody').find(this.applicationEmailInput)
     }
 }
 
