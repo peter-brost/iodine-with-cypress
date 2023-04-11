@@ -27,28 +27,11 @@ describe('Iodine Software Job Application Tests', () => {
         const formattedDate = moment().format('YYYY-MM-DD')
         header.navigateToCareersPage()
         careersPage.applyToSDETRole(firstName, lastName, formattedDate)
-        
-        // cy.get('input:invalid').should('have.length', 1)
-        // cy.get(CareersPage.getInvalidInput()).should('have.length', 1)
-        // cy.get(CareersPage.getApplicationEmailInput()).then(($input) => {
-        //     expect($input[0].validationMessage).to.eq('Please fill out this field.')
-        // })
 
-        // cy.get(CareersPage.getApplicationEmailInput()).then(($input) => {
-        //     expect($input[0].validationMessage).to.include(
-        //       `Please fill out this field.`
-        //     )
-        //   })
-
-        // cy.get(CareersPage.getApplicationEmailInput()).then(($input) => {
-        //     expect($input[0].validationMessage).to.eq('Please fill out this field.')
-        //   })
-
-
-        // cy.get('input[ns-qa="emailField"]:invalid')
-        //     .invoke('prop', 'validationMessage')
-        //     .should('equal', 'Please fill out this field.')
-
-        // assert that warning message pops-up here
+        // Verifies that a form validation message is displayed when the email field is empty
+        careersPage.getIframedEmailElement().then(($input) => {
+            const validationMessage = $input[0].validationMessage;
+            expect(validationMessage).to.equal('Please fill out this field.')
+          })
     })
 })

@@ -122,6 +122,11 @@ class CareersPage {
         this.selectDisabilityStatus(firstName, lastName, formattedDate)
         this.inputApplicationDetails(firstName, lastName)
     }
+
+    getIframedEmailElement() {
+        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
+        return cy.get('@updatedIframeBody').find(this.applicationEmailInput)
+    }
 }
 
 export default CareersPage
