@@ -63,6 +63,32 @@ class CareersPage {
         return cy.get('@iframeBody')
     }
 
+    applyToSDETRole(firstName, lastName, formattedDate) {
+        cy.wait(1000)
+        this.getSDETRoleLink().click()
+        cy.wait(1000)
+        this.getApplyButton().click()
+        cy.wait(1000)
+        this.getContinueButton().click()
+        cy.wait(1000)
+        this.getGenderSelection().click()
+        this.getEthnicitySelection().click()
+        this.getContinueButton().click()
+        cy.wait(1000)
+        this.getVeteranSelection().click()
+        this.getContinueButton().click()
+        cy.wait(1000)
+        this.getDisabilitySelection().click()
+        cy.wait(1000)
+        this.getDisabilityNameInput().type(`${firstName} ${lastName}`)
+        this.getDisabilityDateInput().type(formattedDate)
+        this.getContinueButton().click()
+        cy.wait(1000)
+        this.getApplicationFirstNameInput().type(firstName)
+        this.getApplicationLastNameInput().type(lastName)
+        this.getApplicationSubmitButton().click()
+    }
+
 }
 
 export default new CareersPage()
