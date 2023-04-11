@@ -7,11 +7,6 @@ class IndexPage {
     visit() {
         cy.visit('https://iodinesoftware.com/')
     }
-
-    // Locators
-    getCompanyButton() {
-        return cy.get('.header-nav-cont #menu-item-4050')
-    }
 }
 
-export default new IndexPage()
+export default IndexPage

@@ -23,3 +23,23 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('iframe', { prevSubject: 'element' }, ($iframe) => {
+    return new Cypress.Promise((resolve, reject) => {
+        const onLoad = () => {
+            $iframe.off('load', onLoad)
+            resolve($iframe.contents().find('body'))
+        }
+
+        if ($iframe.prop('contentWindow').document.readyState === 'complete') {
+            resolve($iframe.contents().find('body'));
+          } else {
+            $iframe.on('load', onLoad);
+          }
+
+        setTimeout(() => {
+            $iframe.off('load', onLoad)
+            reject(new Error('iframe load timed out'))
+        }, 5000) // Set the timeout duration to 5000 ms, or 5 seconds
+    })
+})

@@ -2,26 +2,32 @@
 class Header {
     /**
      * All locators and helper functions for the Header component
+     * 
+     * Note: components are distinct from pages in that they are pieces of a page that can be reused
      */
 
     // Locators
-    getMainHeader() {
-        return cy.get('.header-nav-cont')
+    get mainHeader() {
+        return '.header-nav-cont'
     }
 
-    getCompanyButton() {
-        return this.getMainHeader().find('#menu-item-4050')
+    get companyButton() {
+        return '#menu-item-4050'
     }
 
-    getCareersButton() {
-        return this.getCompanyButton().find('a[href*="careers-2"]')
+    get careersButton() {
+        return 'a[href*="careers-2"]'
     }
 
     // Helper methods
     navigateToCareersPage() {
-        this.getCompanyButton().realHover()
-        this.getCareersButton().invoke('removeAttr', 'target').click()
+        cy.get(this.mainHeader).as('mainHeader')
+        cy.get('@mainHeader').find(this.companyButton).as('companyButton')
+        cy.get('@companyButton').find(this.careersButton).as('careersButton')
+
+        cy.get('@companyButton').realHover()
+        cy.get('@careersButton').invoke('removeAttr', 'target').click()
     }
 }
 
-export default new Header()
+export default Header
