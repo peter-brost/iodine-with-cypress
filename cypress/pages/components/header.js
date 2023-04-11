@@ -5,7 +5,6 @@ class Header {
      */
 
     // Locators
-
     getMainHeader() {
         return cy.get('.header-nav-cont')
     }
@@ -23,7 +22,6 @@ class Header {
         this.getCompanyButton().realHover()
         this.getCareersButton().invoke('removeAttr', 'target').click()
     }
-
 }
 
 export default new Header()

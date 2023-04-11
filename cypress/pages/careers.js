@@ -59,7 +59,6 @@ class CareersPage {
             const $body = $iframe.contents().find('body')
             cy.wrap($body).as('iframeBody')
           })
-          
         return cy.get('@iframeBody')
     }
 
@@ -88,7 +87,6 @@ class CareersPage {
         this.getApplicationLastNameInput().type(lastName)
         this.getApplicationSubmitButton().click()
     }
-
 }
 
 export default new CareersPage()

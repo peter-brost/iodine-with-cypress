@@ -1,7 +1,6 @@
 import CareersPage from "../../pages/careers"
 import IndexPage from "../../pages/index"
 import Header from "../../pages/components/header"
-import careers from "../../pages/careers"
 
 const faker = require('faker');
 const moment = require('moment');
@@ -25,11 +24,5 @@ describe('Iodine Software Job Application Tests', () => {
         Header.navigateToCareersPage()
         CareersPage.applyToSDETRole(firstName, lastName, formattedDate)
         // assert that warning message pops-up here
-
- 
     })
-
-
-
-
 })

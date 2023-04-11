@@ -12,7 +12,6 @@ class IndexPage {
     getCompanyButton() {
         return cy.get('.header-nav-cont #menu-item-4050')
     }
-
 }
 
 export default new IndexPage()
