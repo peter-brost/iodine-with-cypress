@@ -30,7 +30,7 @@ describe('Iodine Software Job Application Tests', () => {
 
         // Verifies that a form validation message is displayed when the email field is empty
         careersPage.getIframedEmailElement().then(($input) => {
-            const validationMessage = $input[0].validationMessage;
+            const validationMessage = $input[0].validationMessage
             expect(validationMessage).to.equal('Please fill out this field.')
           })
     })

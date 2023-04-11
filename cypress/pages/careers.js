@@ -63,7 +63,7 @@ class CareersPage {
 
     // Helper functions
     waitForAndGetNewIframe() {
-        cy.wait(2000)
+        cy.wait(1000) // TODO - Find an implicit wait that works here
         cy.get(this.gnewtonIframe).as('gnewtonIframe').should('be.visible')
         cy.get('@gnewtonIframe').iframe().as('iframeBody')
     }
