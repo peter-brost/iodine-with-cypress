@@ -62,7 +62,6 @@ class CareersPage {
     }
 
     // Helper functions
-
     waitForAndGetNewIframe() {
         cy.wait(2000)
         cy.get(this.gnewtonIframe).as('gnewtonIframe').should('be.visible')
@@ -106,10 +105,10 @@ class CareersPage {
     }
 
     inputApplicationDetails(firstName, lastName) {
+        // Ideally this would be expanded to take in arguments for every single field on the application form
         this.waitForAndGetNewIframe()
         cy.get('@iframeBody').find(this.applicationFirstNameInput).type(firstName)
         cy.get('@iframeBody').find(this.applicationLastNameInput).type(lastName)
-        // Ideally this would be expanded to take in arguments for every single field on the application form
         cy.get('@iframeBody').find(this.applicationSubmitButton).click()
     }
 
