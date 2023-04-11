@@ -61,50 +61,66 @@ class CareersPage {
         return 'button[ns-qa="submitBtn"]'
     }
 
-    applyToSDETRole(firstName, lastName, formattedDate) {
-        
+    // Helper functions
+    selectSDETRole() {
         cy.wait(2000)
         cy.get(this.gnewtonIframe).as('gnewtonIframe').should('be.visible')
         cy.get('@gnewtonIframe').iframe().as('iframeBody')
         cy.get('@iframeBody').find(this.sdetRoleLink).click()
-        
+    }
+
+    selectApplyButton() {
         cy.wait(2000)
         cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
         cy.get('@updatedIframeBody').find(this.applyButton).click()
-        
+    }
+
+    selectContinueButton() {
         cy.wait(2000)
         cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
         cy.get('@updatedIframeBody').find(this.continueButton).click()
-        
+    }
+
+    selectDemographics() {
         cy.wait(2000)
         cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
         cy.get('@updatedIframeBody').find(this.genderSelection).click()
         cy.get('@updatedIframeBody').find(this.ethnicitySelection).click()
         cy.get('@updatedIframeBody').find(this.continueButton).click()
-        
+    }
+
+    selectVeteranStatus() {
         cy.wait(2000)
         cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
         cy.get('@updatedIframeBody').find(this.veteranSelection).click()
         cy.get('@updatedIframeBody').find(this.continueButton).click()
-        
+    }
+
+    selectDisabilityStatus(firstName, lastName, formattedDate) {
         cy.wait(2000)
         cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
         cy.get('@updatedIframeBody').find(this.disabilitySelection).click()
-        
-        cy.wait(2000)
-        cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
         cy.get('@updatedIframeBody').find(this.disabilityNameInput).type(`${firstName} ${lastName}`)
         cy.get('@updatedIframeBody').find(this.disabilityDateInput).type(formattedDate)
         cy.get('@updatedIframeBody').find(this.continueButton).click()
-        
+    }
+
+    inputApplicationDetails(firstName, lastName) {
         cy.wait(2000)
         cy.get('@gnewtonIframe').iframe().as('updatedIframeBody')
         cy.get('@updatedIframeBody').find(this.applicationFirstNameInput).type(firstName)
         cy.get('@updatedIframeBody').find(this.applicationLastNameInput).type(lastName)
         cy.get('@updatedIframeBody').find(this.applicationSubmitButton).click()
+    }
 
-
-
+    applyToSDETRole(firstName, lastName, formattedDate) {
+        this.selectSDETRole()
+        this.selectApplyButton()
+        this.selectContinueButton()
+        this.selectDemographics()
+        this.selectVeteranStatus()
+        this.selectDisabilityStatus(firstName, lastName, formattedDate)
+        this.inputApplicationDetails(firstName, lastName)
     }
 }
 
